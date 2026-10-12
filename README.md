@@ -48,6 +48,7 @@ The module uses two world database tables.
 ### Flight Path Routes
 
 `flightpath_eastern_kingdoms.sql'
+'flightpath_kalimdor.sql'
 
 Defines which neighboring flight points can be discovered from each location.
 
