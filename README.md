@@ -115,4 +115,4 @@ Purchasing a flight point unlocks it; it does not automatically transport the pl
 
 ## License
 
-License to be specified. See the repository's `LICENSE` file when available.
+AGPL-3.0
