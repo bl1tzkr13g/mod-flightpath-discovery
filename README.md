@@ -47,7 +47,7 @@ The module uses two world database tables.
 
 ### Flight Path Routes
 
-`mod_flightpath_discovery_routes`
+`flightpath_eastern_kingdoms.sql'
 
 Defines which neighboring flight points can be discovered from each location.
 
