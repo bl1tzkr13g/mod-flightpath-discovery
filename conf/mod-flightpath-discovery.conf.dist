@@ -1,0 +1,13 @@
+[worldserver]
+FlightPathDiscovery.Enable = 1
+# Initially enable on one NPC for testing; set 0 to enable all eligible NPCs.
+FlightPathDiscovery.TestCreatureEntry = 0
+FlightPathDiscovery.BoardEntry = 900100
+FlightPathDiscovery.BoardDistance = 2.5
+# Refresh summoned boards every 12 hours, as flight masters load.
+
+# Northrend boards and unlocks are OFF until enabled here and worldserver restarted.
+FlightPathDiscovery.EnableNorthrend = 0
+# Fallback only when a destination zone and its parent have no level.
+# Use SQL price overrides for accurate per-zone pricing.
+FlightPathDiscovery.UnknownZoneLevel = 1
