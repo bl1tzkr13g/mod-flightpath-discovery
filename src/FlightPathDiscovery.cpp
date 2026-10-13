@@ -105,40 +105,72 @@ void LoadNetwork()
 {
     routes.clear();
     prices.clear();
-    for (auto const& continent : { std::pair<char const*, uint32>{"Kalimdor", 1}, {"EasternKingdoms", 0} })
+
+    // Read only keys that actually exist in the loaded configuration.
+    auto const& config = sConfigMgr->GetConfig();
+
+    for (auto const& continent : {
+        std::pair<char const*, uint32>{"Kalimdor", 1},
+        {"EasternKingdoms", 0}
+    })
     {
         std::string prefix = std::string("FlightPathDiscovery.") + continent.first + ".";
+
         for (uint32 source = 1; source <= 256; ++source)
         {
             std::string key = prefix + "Routes." + std::to_string(source);
-            std::string configured = sConfigMgr->GetOption<std::string>(key, "");
-            if (configured.empty()) continue;
+
+            // Skip missing configuration properties.
+            if (!config.has(key))
+                continue;
+
+            int64 value = sConfigMgr->GetOption<int64>(key, -1, false);
+            if (configured.empty())
+                continue;
+
             auto const* sourceInfo = sTaxiNodesStore.LookupEntry(source);
-            if (!sourceInfo || sourceInfo->map_id != continent.second) continue;
+            if (!sourceInfo || sourceInfo->map_id != continent.second)
+                continue;
+
             std::stringstream input(configured);
             std::string token;
+
             while (std::getline(input, token, ','))
             {
                 uint32 destination = 0;
-                if (!ParseNode(token, destination) || destination == source) continue;
+
+                if (!ParseNode(token, destination) || destination == source)
+                    continue;
+
                 auto const* destInfo = sTaxiNodesStore.LookupEntry(destination);
-                if (!destInfo || destInfo->map_id != continent.second) continue;
+
+                if (!destInfo || destInfo->map_id != continent.second)
+                    continue;
+
                 routes[source].insert(destination);
             }
         }
+
         for (uint32 node = 1; node <= 256; ++node)
         {
             auto const* info = sTaxiNodesStore.LookupEntry(node);
-            if (!info || info->map_id != continent.second) continue;
+
+            if (!info || info->map_id != continent.second)
+                continue;
+
             std::string key = prefix + "Price." + std::to_string(node);
-            // -1 means no override. Zero and values > INT32_MAX are rejected.
-            int64 value = sConfigMgr->GetOption<int64>(key, -1);
+
+            // Skip missing price overrides.
+            if (!config.has(key))
+                continue;
+
+            int64 value = sConfigMgr->GetOption<int64>(key, -1, false);
+
             if (value > 0 && value <= std::numeric_limits<int32>::max())
                 prices[node] = uint32(value);
         }
     }
 }
-
 uint32 Price(uint32 destination)
 {
     auto it = prices.find(destination);
