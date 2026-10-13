@@ -1,7 +1,8 @@
 # Flight Path Discovery - AzerothCore WotLK 3.3.5a
 # First-release configuration generated from published GitHub SQL.
-# IMPORTANT: Current C++ reads routes/prices from MySQL. This file becomes active
-# ONLY AFTER the module C++ is updated to parse these keys.
+# Routes and destination prices are loaded directly from this configuration.
+# MySQL route and price tables are no longer required.
+# Restart worldserver after changing routes or prices.
 # Routes are directional. Node IDs correspond to TaxiNodes.dbc.
 # Prices are per destination in copper (100 copper = 1 silver).
 # Faction restrictions must still be enforced in C++ via AzerothCore taxi masks.
