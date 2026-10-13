@@ -293,9 +293,22 @@ public:
     }
 };
 
+// Load the configured flight path network during world startup,
+// after AzerothCore has initialized its game data.
+class FlightPathDiscoveryWorld : public WorldScript
+{
+public:
+    FlightPathDiscoveryWorld() : WorldScript("FlightPathDiscoveryWorld") { }
+
+    void OnStartup() override
+    {
+        FPD::LoadNetwork();
+    }
+};
+
 void Addmod_flightpath_discoveryScripts()
 {
-    FPD::LoadNetwork();
+    new FlightPathDiscoveryWorld();
     new FlightPathDiscoveryBoard();
     new FlightPathDiscoverySpawner();
 }
