@@ -345,7 +345,7 @@ public:
         EnsureBoard(npc);
     }
 
-    void OnCreatureUpdate(Creature* npc, uint32 diff) override
+    void OnAllCreatureUpdate(Creature* npc, uint32 diff) override
     {
         if (!IsEligibleMaster(npc))
             return;
