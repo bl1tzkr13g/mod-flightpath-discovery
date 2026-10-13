@@ -101,13 +101,11 @@ bool ParseNode(std::string const& input, uint32& node)
     catch (...) { return false; }
 }
 
+
 void LoadNetwork()
 {
     routes.clear();
     prices.clear();
-
-    // Read only keys that actually exist in the loaded configuration.
-    auto const& config = sConfigMgr->GetConfig();
 
     for (auto const& continent : {
         std::pair<char const*, uint32>{"Kalimdor", 1},
@@ -120,15 +118,14 @@ void LoadNetwork()
         {
             std::string key = prefix + "Routes." + std::to_string(source);
 
-            // Skip missing configuration properties.
-            if (!config.has(key))
-                continue;
+            // Missing route entries are optional.
+            std::string configured = sConfigMgr->GetOption<std::string>(key, "", false);
 
-            int64 value = sConfigMgr->GetOption<int64>(key, -1, false);
             if (configured.empty())
                 continue;
 
             auto const* sourceInfo = sTaxiNodesStore.LookupEntry(source);
+
             if (!sourceInfo || sourceInfo->map_id != continent.second)
                 continue;
 
@@ -160,10 +157,7 @@ void LoadNetwork()
 
             std::string key = prefix + "Price." + std::to_string(node);
 
-            // Skip missing price overrides.
-            if (!config.has(key))
-                continue;
-
+            // Missing price overrides are optional.
             int64 value = sConfigMgr->GetOption<int64>(key, -1, false);
 
             if (value > 0 && value <= std::numeric_limits<int32>::max())
@@ -171,6 +165,7 @@ void LoadNetwork()
         }
     }
 }
+
 uint32 Price(uint32 destination)
 {
     auto it = prices.find(destination);
