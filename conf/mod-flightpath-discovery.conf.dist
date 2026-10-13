@@ -15,6 +15,8 @@ FlightPathDiscovery.BoardEntry = 900100
 FlightPathDiscovery.BoardDistance = 2.5
 FlightPathDiscovery.EnableNorthrend = 0
 FlightPathDiscovery.UnknownZoneLevel = 1
+# Interval in seconds between nearby discovery-board recovery checks.
+FlightPathDiscovery.BoardRecoveryInterval = 10
 
 # =================================================================
 # KALIMDOR
