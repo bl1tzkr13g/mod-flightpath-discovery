@@ -246,52 +246,186 @@ public:
     }
 };
 
+
 class FlightPathDiscoverySpawner : public AllCreatureScript
 {
-public:
-    FlightPathDiscoverySpawner() : AllCreatureScript("FlightPathDiscoverySpawner") { }
-    void OnCreatureAddWorld(Creature* npc) override
+private:
+    // Recovery timers are tracked per flight master, not globally.
+    std::map<uint64, uint32> recoveryTimers;
+
+    bool IsEligibleMaster(Creature* npc) const
     {
-        if (!FPD::Enabled() || !npc || !FPD::SupportedMap(npc->GetMapId()) ||
-            !npc->HasFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_FLIGHTMASTER)) return;
-        uint32 test = sConfigMgr->GetOption<uint32>("FlightPathDiscovery.TestCreatureEntry", 0);
-        if (test && npc->GetEntry() != test) return;
+        if (!FPD::Enabled() || !npc || !npc->IsInWorld() ||
+            !FPD::SupportedMap(npc->GetMapId()) ||
+            !npc->HasFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_FLIGHTMASTER))
+            return false;
+
+        uint32 test = sConfigMgr->GetOption<uint32>(
+            "FlightPathDiscovery.TestCreatureEntry", 0);
+
+        return !test || npc->GetEntry() == test;
+    }
+
+    void EnsureBoard(Creature* npc)
+    {
+        if (!IsEligibleMaster(npc))
+            return;
+
+        uint64 masterKey = npc->GetGUID().GetRawValue();
+
+        // Check the actual board, not just its cached association.
         {
             std::lock_guard<std::mutex> guard(FPD::associationsLock);
-            if (FPD::masterBoards.count(npc->GetGUID().GetRawValue())) return;
+
+            auto it = FPD::masterBoards.find(masterKey);
+
+            if (it != FPD::masterBoards.end())
+            {
+                ObjectGuid boardGuid = it->second;
+
+                GameObject* existing =
+                    npc->GetMap()->GetGameObject(boardGuid);
+
+                if (existing && existing->IsInWorld() &&
+                    existing->GetEntry() == FPD::BoardEntry())
+                {
+                    // Restore the reverse association if necessary.
+                    FPD::associations[boardGuid.GetRawValue()] =
+                        npc->GetGUID();
+                    return;
+                }
+
+                // The cached board no longer exists.
+                FPD::associations.erase(boardGuid.GetRawValue());
+                FPD::masterBoards.erase(it);
+            }
         }
-        float dist = sConfigMgr->GetOption<float>("FlightPathDiscovery.BoardDistance", 2.5f);
+
+        float dist = sConfigMgr->GetOption<float>(
+            "FlightPathDiscovery.BoardDistance", 2.5f);
+
         float a = npc->GetOrientation() + 1.57079632679f;
-        GameObject* board = npc->SummonGameObject(FPD::BoardEntry(),
+
+        GameObject* board = npc->SummonGameObject(
+            FPD::BoardEntry(),
             npc->GetPositionX() + std::cos(a) * dist,
             npc->GetPositionY() + std::sin(a) * dist,
-            npc->GetPositionZ(), npc->GetOrientation(),
-            0.0f, 0.0f, std::sin(npc->GetOrientation() / 2),
-            std::cos(npc->GetOrientation() / 2), 0, false);
-        if (board)
+            npc->GetPositionZ(),
+            npc->GetOrientation(),
+            0.0f,
+            0.0f,
+            std::sin(npc->GetOrientation() / 2),
+            std::cos(npc->GetOrientation() / 2),
+            0,
+            false
+        );
+
+        if (!board)
+            return;
+
+        std::lock_guard<std::mutex> guard(FPD::associationsLock);
+
+        FPD::associations[board->GetGUID().GetRawValue()] =
+            npc->GetGUID();
+
+        FPD::masterBoards[masterKey] = board->GetGUID();
+    }
+
+public:
+    FlightPathDiscoverySpawner()
+        : AllCreatureScript("FlightPathDiscoverySpawner")
+    {
+    }
+
+    void OnCreatureAddWorld(Creature* npc) override
+    {
+        if (!IsEligibleMaster(npc))
+            return;
+
+        EnsureBoard(npc);
+    }
+
+    void OnCreatureUpdate(Creature* npc, uint32 diff) override
+    {
+        if (!IsEligibleMaster(npc))
+            return;
+
+        // Clamp to at least one second, avoiding zero-interval checks.
+        uint32 interval = sConfigMgr->GetOption<uint32>(
+            "FlightPathDiscovery.BoardRecoveryInterval", 10);
+
+        if (interval < 1)
+            interval = 1;
+
+        // Avoid overflow when converting seconds to milliseconds.
+        if (interval > 3600)
+            interval = 3600;
+
+        uint32 intervalMs = interval * 1000;
+        uint64 masterKey = npc->GetGUID().GetRawValue();
+
+        bool checkNow = false;
+
         {
             std::lock_guard<std::mutex> guard(FPD::associationsLock);
-            FPD::associations[board->GetGUID().GetRawValue()] = npc->GetGUID();
-            FPD::masterBoards[npc->GetGUID().GetRawValue()] = board->GetGUID();
+
+            uint32& elapsed = recoveryTimers[masterKey];
+
+            if (diff >= intervalMs ||
+                elapsed >= intervalMs - diff)
+            {
+                elapsed = 0;
+                checkNow = true;
+            }
+            else
+            {
+                elapsed += diff;
+            }
         }
+
+        if (checkNow)
+            EnsureBoard(npc);
     }
 
     void OnCreatureRemoveWorld(Creature* npc) override
     {
-        if (!npc) return;
+        if (!npc)
+            return;
+
         ObjectGuid boardGuid;
+        bool hasBoard = false;
+
         {
             std::lock_guard<std::mutex> guard(FPD::associationsLock);
-            auto it = FPD::masterBoards.find(npc->GetGUID().GetRawValue());
-            if (it == FPD::masterBoards.end()) return;
-            boardGuid = it->second;
-            FPD::associations.erase(boardGuid.GetRawValue());
-            FPD::masterBoards.erase(it);
+
+            uint64 masterKey = npc->GetGUID().GetRawValue();
+
+            recoveryTimers.erase(masterKey);
+
+            auto it = FPD::masterBoards.find(masterKey);
+
+            if (it != FPD::masterBoards.end())
+            {
+                boardGuid = it->second;
+                hasBoard = true;
+
+                FPD::associations.erase(boardGuid.GetRawValue());
+                FPD::masterBoards.erase(it);
+            }
         }
-        if (GameObject* board = npc->GetMap()->GetGameObject(boardGuid))
-            board->Delete();
+
+        // Delete outside the lock because deletion invokes callbacks.
+        if (hasBoard)
+        {
+            if (GameObject* board =
+                npc->GetMap()->GetGameObject(boardGuid))
+            {
+                board->Delete();
+            }
+        }
     }
 };
+
 
 // Load the configured flight path network during world startup,
 // after AzerothCore has initialized its game data.
