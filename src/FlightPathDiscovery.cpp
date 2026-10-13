@@ -51,6 +51,8 @@ uint32 NodeFor(Creature* npc, Player* player)
 
 std::mutex associationsLock;
 std::map<uint64, ObjectGuid> associations;
+// Reverse lookup: flight-master GUID -> summoned board GUID.
+std::map<uint64, ObjectGuid> masterBoards;
 
 Creature* MasterFor(Player* player, GameObject* board)
 {
@@ -154,7 +156,12 @@ public:
     {
         if (go->GetEntry() != FPD::BoardEntry()) return;
         std::lock_guard<std::mutex> guard(FPD::associationsLock);
-        FPD::associations.erase(go->GetGUID().GetRawValue());
+        auto it = FPD::associations.find(go->GetGUID().GetRawValue());
+        if (it != FPD::associations.end())
+        {
+            FPD::masterBoards.erase(it->second.GetRawValue());
+            FPD::associations.erase(it);
+        }
     }
     bool CanGameObjectGossipHello(Player* player, GameObject* go) override
     {
@@ -202,21 +209,68 @@ class FlightPathDiscoverySpawner : public AllCreatureScript
 {
 public:
     FlightPathDiscoverySpawner() : AllCreatureScript("FlightPathDiscoverySpawner") { }
+
     void OnCreatureAddWorld(Creature* npc) override
     {
-        if (!FPD::Enabled() || !npc || !FPD::SupportedMap(npc->GetMapId()) || !npc->HasFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_FLIGHTMASTER)) return;
+        if (!FPD::Enabled() || !npc || !FPD::SupportedMap(npc->GetMapId()) ||
+            !npc->HasFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_FLIGHTMASTER))
+            return;
+
         uint32 test = sConfigMgr->GetOption<uint32>("FlightPathDiscovery.TestCreatureEntry", 0);
-        if (test && npc->GetEntry() != test) return;
+        if (test && npc->GetEntry() != test)
+            return;
+
+        // Prevent duplicate boards if this hook runs again for the same master.
+        // The board-removal callback clears this record if a board is removed.
+        {
+            std::lock_guard<std::mutex> guard(FPD::associationsLock);
+            if (FPD::masterBoards.count(npc->GetGUID().GetRawValue()))
+                return;
+        }
+
         float dist = sConfigMgr->GetOption<float>("FlightPathDiscovery.BoardDistance", 2.5f);
         float a = npc->GetOrientation() + 1.57079632679f;
-        GameObject* board = npc->SummonGameObject(FPD::BoardEntry(), npc->GetPositionX() + std::cos(a) * dist,
-            npc->GetPositionY() + std::sin(a) * dist, npc->GetPositionZ(), npc->GetOrientation(),
-            0.0f, 0.0f, std::sin(npc->GetOrientation() / 2), std::cos(npc->GetOrientation() / 2), 43200, false);
+
+        // Zero lifetime: no 12-hour expiration. Remove the board when its
+        // flight master leaves the world instead.
+        GameObject* board = npc->SummonGameObject(FPD::BoardEntry(),
+            npc->GetPositionX() + std::cos(a) * dist,
+            npc->GetPositionY() + std::sin(a) * dist,
+            npc->GetPositionZ(), npc->GetOrientation(),
+            0.0f, 0.0f,
+            std::sin(npc->GetOrientation() / 2),
+            std::cos(npc->GetOrientation() / 2),
+            0, false);
+
         if (board)
         {
             std::lock_guard<std::mutex> guard(FPD::associationsLock);
             FPD::associations[board->GetGUID().GetRawValue()] = npc->GetGUID();
+            FPD::masterBoards[npc->GetGUID().GetRawValue()] = board->GetGUID();
         }
+    }
+
+    void OnCreatureRemoveWorld(Creature* npc) override
+    {
+        if (!npc)
+            return;
+
+        ObjectGuid boardGuid;
+        {
+            std::lock_guard<std::mutex> guard(FPD::associationsLock);
+            auto it = FPD::masterBoards.find(npc->GetGUID().GetRawValue());
+            if (it == FPD::masterBoards.end())
+                return;
+
+            boardGuid = it->second;
+            FPD::associations.erase(boardGuid.GetRawValue());
+            FPD::masterBoards.erase(it);
+        }
+
+        // Do not hold associationsLock during Delete(): removing a gameobject
+        // can invoke OnGameObjectRemoveWorld and re-enter the cleanup code.
+        if (GameObject* board = npc->GetMap()->GetGameObject(boardGuid))
+            board->Delete();
     }
 };
 
