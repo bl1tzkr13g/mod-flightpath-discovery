@@ -695,3 +695,338 @@ FlightPathDiscovery.Outland.Price.159 = 50000
 FlightPathDiscovery.Outland.Price.160 = 50000
 FlightPathDiscovery.Outland.Price.163 = 50000
 FlightPathDiscovery.Outland.Price.164 = 50000
+
+
+# ============================================================
+# NORTHREND FLIGHT PATH DISCOVERY v0001a
+# Map ID: 571
+# Routes extracted from TaxiPath.dbc (WoW 3.3.5a).
+# Routes are directional.
+# Excludes quest/transport flights, Wintergrasp (303,332),
+# Coldarra special transport (226), and gated destinations
+# Dun Nifflelem (322), Death's Rise (325),
+# The Shadow Vault (333), Crusaders' Pinnacle (335).
+# Requires C++ TaxiMaskSize support and Northrend in LoadNetwork.
+# ============================================================
+
+# ============================================================
+# HORDE NORTHREND FLIGHT PATHS
+# ============================================================
+
+# HOWLING FJORD
+# ------------------------------------------------------------
+# 190: New Agamand, Howling Fjord
+# Destinations: 191 (Vengeance Landing, Howling Fjord), 192 (Camp Winterhoof, Howling Fjord), 248 (Apothecary Camp, Howling Fjord), 254 (Venomspite, Dragonblight), 295 (Kamagua, Howling Fjord)
+FlightPathDiscovery.Northrend.Routes.190 = "191,192,248,254,295"
+
+# 191: Vengeance Landing, Howling Fjord
+# Destinations: 190 (New Agamand, Howling Fjord), 192 (Camp Winterhoof, Howling Fjord), 249 (Camp Oneqwah, Grizzly Hills)
+FlightPathDiscovery.Northrend.Routes.191 = "190,192,249"
+
+# 192: Camp Winterhoof, Howling Fjord
+# Destinations: 190 (New Agamand, Howling Fjord), 191 (Vengeance Landing, Howling Fjord), 248 (Apothecary Camp, Howling Fjord), 249 (Camp Oneqwah, Grizzly Hills), 250 (Conquest Hold, Grizzly Hills)
+FlightPathDiscovery.Northrend.Routes.192 = "190,191,248,249,250"
+
+# 248: Apothecary Camp, Howling Fjord
+# Destinations: 190 (New Agamand, Howling Fjord), 192 (Camp Winterhoof, Howling Fjord), 250 (Conquest Hold, Grizzly Hills), 254 (Venomspite, Dragonblight), 295 (Kamagua, Howling Fjord)
+FlightPathDiscovery.Northrend.Routes.248 = "190,192,250,254,295"
+
+# BOREAN TUNDRA
+# ------------------------------------------------------------
+# 257: Warsong Hold, Borean Tundra
+# Destinations: 258 (Taunka'le Village, Borean Tundra), 259 (Bor'gorok Outpost, Borean Tundra), 289 (Amber Ledge, Borean Tundra), 296 (Unu'pe, Borean Tundra)
+FlightPathDiscovery.Northrend.Routes.257 = "258,259,289,296"
+
+# 258: Taunka'le Village, Borean Tundra
+# Destinations: 256 (Agmar's Hammer, Dragonblight), 257 (Warsong Hold, Borean Tundra), 259 (Bor'gorok Outpost, Borean Tundra), 289 (Amber Ledge, Borean Tundra), 296 (Unu'pe, Borean Tundra)
+FlightPathDiscovery.Northrend.Routes.258 = "256,257,259,289,296"
+
+# 259: Bor'gorok Outpost, Borean Tundra
+# Destinations: 257 (Warsong Hold, Borean Tundra), 258 (Taunka'le Village, Borean Tundra), 289 (Amber Ledge, Borean Tundra), 308 (River's Heart, Sholazar Basin), 309 (Nesingwary Base Camp, Sholazar Basin)
+FlightPathDiscovery.Northrend.Routes.259 = "257,258,289,308,309"
+
+# DRAGONBLIGHT
+# ------------------------------------------------------------
+# 254: Venomspite, Dragonblight
+# Destinations: 190 (New Agamand, Howling Fjord), 248 (Apothecary Camp, Howling Fjord), 250 (Conquest Hold, Grizzly Hills), 252 (Wyrmrest Temple, Dragonblight), 256 (Agmar's Hammer, Dragonblight), 260 (Kor'koron Vanguard, Dragonblight), 294 (Moa'ki, Dragonblight), 305 (Ebon Watch, Zul'Drak), 306 (Light's Breach, Zul'Drak)
+FlightPathDiscovery.Northrend.Routes.254 = "190,248,250,252,256,260,294,305,306"
+
+# 256: Agmar's Hammer, Dragonblight
+# Destinations: 252 (Wyrmrest Temple, Dragonblight), 254 (Venomspite, Dragonblight), 258 (Taunka'le Village, Borean Tundra), 260 (Kor'koron Vanguard, Dragonblight), 294 (Moa'ki, Dragonblight)
+FlightPathDiscovery.Northrend.Routes.256 = "252,254,258,260,294"
+
+# 260: Kor'koron Vanguard, Dragonblight
+# Destinations: 252 (Wyrmrest Temple, Dragonblight), 254 (Venomspite, Dragonblight), 256 (Agmar's Hammer, Dragonblight), 305 (Ebon Watch, Zul'Drak), 310 (Dalaran)
+FlightPathDiscovery.Northrend.Routes.260 = "252,254,256,305,310"
+
+# GRIZZLY HILLS
+# ------------------------------------------------------------
+# 249: Camp Oneqwah, Grizzly Hills
+# Destinations: 191 (Vengeance Landing, Howling Fjord), 192 (Camp Winterhoof, Howling Fjord), 250 (Conquest Hold, Grizzly Hills), 304 (The Argent Stand, Zul'Drak), 306 (Light's Breach, Zul'Drak), 307 (Zim'Torga, Zul'Drak)
+FlightPathDiscovery.Northrend.Routes.249 = "191,192,250,304,306,307"
+
+# 250: Conquest Hold, Grizzly Hills
+# Destinations: 192 (Camp Winterhoof, Howling Fjord), 248 (Apothecary Camp, Howling Fjord), 249 (Camp Oneqwah, Grizzly Hills), 254 (Venomspite, Dragonblight), 306 (Light's Breach, Zul'Drak)
+FlightPathDiscovery.Northrend.Routes.250 = "192,248,249,254,306"
+
+# CRYSTALSONG FOREST
+# ------------------------------------------------------------
+# 337: Sunreaver's Command, Crystalsong Forest
+# Destinations: 305 (Ebon Watch, Zul'Drak), 310 (Dalaran), 320 (K3, The Storm Peaks)
+FlightPathDiscovery.Northrend.Routes.337 = "305,310,320"
+
+# THE STORM PEAKS
+# ------------------------------------------------------------
+# 323: Grom'arsh Crash-Site, The Storm Peaks
+# Destinations: 320 (K3, The Storm Peaks), 324 (Camp Tunka'lo, The Storm Peaks), 326 (Ulduar, The Storm Peaks), 327 (Bouldercrag's Refuge, The Storm Peaks), 334 (The Argent Vanguard, Icecrown)
+FlightPathDiscovery.Northrend.Routes.323 = "320,324,326,327,334"
+
+# 324: Camp Tunka'lo, The Storm Peaks
+# Destinations: 307 (Zim'Torga, Zul'Drak), 320 (K3, The Storm Peaks), 323 (Grom'arsh Crash-Site, The Storm Peaks), 326 (Ulduar, The Storm Peaks)
+FlightPathDiscovery.Northrend.Routes.324 = "307,320,323,326"
+
+# ============================================================
+# ALLIANCE NORTHREND FLIGHT PATHS
+# ============================================================
+
+# HOWLING FJORD
+# ------------------------------------------------------------
+# 183: Valgarde Port, Howling Fjord
+# Destinations: 184 (Fort Wildervar, Howling Fjord), 185 (Westguard Keep, Howling Fjord), 295 (Kamagua, Howling Fjord)
+FlightPathDiscovery.Northrend.Routes.183 = "184,185,295"
+
+# 184: Fort Wildervar, Howling Fjord
+# Destinations: 183 (Valgarde Port, Howling Fjord), 185 (Westguard Keep, Howling Fjord), 253 (Amberpine Lodge, Grizzly Hills), 255 (Westfall Brigade, Grizzly Hills)
+FlightPathDiscovery.Northrend.Routes.184 = "183,185,253,255"
+
+# 185: Westguard Keep, Howling Fjord
+# Destinations: 183 (Valgarde Port, Howling Fjord), 184 (Fort Wildervar, Howling Fjord), 244 (Wintergarde Keep, Dragonblight), 253 (Amberpine Lodge, Grizzly Hills), 295 (Kamagua, Howling Fjord)
+FlightPathDiscovery.Northrend.Routes.185 = "183,184,244,253,295"
+
+# BOREAN TUNDRA
+# ------------------------------------------------------------
+# 245: Valiance Keep, Borean Tundra
+# Destinations: 246 (Fizzcrank Airstrip, Borean Tundra), 247 (Stars' Rest, Dragonblight), 289 (Amber Ledge, Borean Tundra), 296 (Unu'pe, Borean Tundra)
+FlightPathDiscovery.Northrend.Routes.245 = "246,247,289,296"
+
+# 246: Fizzcrank Airstrip, Borean Tundra
+# Destinations: 245 (Valiance Keep, Borean Tundra), 247 (Stars' Rest, Dragonblight), 289 (Amber Ledge, Borean Tundra), 296 (Unu'pe, Borean Tundra), 308 (River's Heart, Sholazar Basin), 309 (Nesingwary Base Camp, Sholazar Basin)
+FlightPathDiscovery.Northrend.Routes.246 = "245,247,289,296,308,309"
+
+# DRAGONBLIGHT
+# ------------------------------------------------------------
+# 244: Wintergarde Keep, Dragonblight
+# Destinations: 185 (Westguard Keep, Howling Fjord), 247 (Stars' Rest, Dragonblight), 251 (Fordragon Hold, Dragonblight), 252 (Wyrmrest Temple, Dragonblight), 253 (Amberpine Lodge, Grizzly Hills), 294 (Moa'ki, Dragonblight), 305 (Ebon Watch, Zul'Drak), 306 (Light's Breach, Zul'Drak), 336 (Windrunner's Overlook, Crystalsong Forest)
+FlightPathDiscovery.Northrend.Routes.244 = "185,247,251,252,253,294,305,306,336"
+
+# 247: Stars' Rest, Dragonblight
+# Destinations: 244 (Wintergarde Keep, Dragonblight), 245 (Valiance Keep, Borean Tundra), 246 (Fizzcrank Airstrip, Borean Tundra), 251 (Fordragon Hold, Dragonblight), 252 (Wyrmrest Temple, Dragonblight), 294 (Moa'ki, Dragonblight), 296 (Unu'pe, Borean Tundra)
+FlightPathDiscovery.Northrend.Routes.247 = "244,245,246,251,252,294,296"
+
+# 251: Fordragon Hold, Dragonblight
+# Destinations: 244 (Wintergarde Keep, Dragonblight), 247 (Stars' Rest, Dragonblight), 252 (Wyrmrest Temple, Dragonblight), 305 (Ebon Watch, Zul'Drak), 310 (Dalaran)
+FlightPathDiscovery.Northrend.Routes.251 = "244,247,252,305,310"
+
+# GRIZZLY HILLS
+# ------------------------------------------------------------
+# 253: Amberpine Lodge, Grizzly Hills
+# Destinations: 184 (Fort Wildervar, Howling Fjord), 185 (Westguard Keep, Howling Fjord), 244 (Wintergarde Keep, Dragonblight), 255 (Westfall Brigade, Grizzly Hills), 306 (Light's Breach, Zul'Drak)
+FlightPathDiscovery.Northrend.Routes.253 = "184,185,244,255,306"
+
+# 255: Westfall Brigade, Grizzly Hills
+# Destinations: 184 (Fort Wildervar, Howling Fjord), 253 (Amberpine Lodge, Grizzly Hills), 304 (The Argent Stand, Zul'Drak), 307 (Zim'Torga, Zul'Drak)
+FlightPathDiscovery.Northrend.Routes.255 = "184,253,304,307"
+
+# CRYSTALSONG FOREST
+# ------------------------------------------------------------
+# 336: Windrunner's Overlook, Crystalsong Forest
+# Destinations: 244 (Wintergarde Keep, Dragonblight), 305 (Ebon Watch, Zul'Drak), 310 (Dalaran), 320 (K3, The Storm Peaks)
+FlightPathDiscovery.Northrend.Routes.336 = "244,305,310,320"
+
+# THE STORM PEAKS
+# ------------------------------------------------------------
+# 321: Frosthold, The Storm Peaks
+# Destinations: 320 (K3, The Storm Peaks), 326 (Ulduar, The Storm Peaks), 327 (Bouldercrag's Refuge, The Storm Peaks), 334 (The Argent Vanguard, Icecrown)
+FlightPathDiscovery.Northrend.Routes.321 = "320,326,327,334"
+
+# ============================================================
+# NEUTRAL NORTHREND FLIGHT PATHS
+# ============================================================
+
+# HOWLING FJORD
+# ------------------------------------------------------------
+# 295: Kamagua, Howling Fjord
+# Destinations: 183 (Valgarde Port, Howling Fjord), 185 (Westguard Keep, Howling Fjord), 190 (New Agamand, Howling Fjord), 248 (Apothecary Camp, Howling Fjord), 294 (Moa'ki, Dragonblight)
+FlightPathDiscovery.Northrend.Routes.295 = "183,185,190,248,294"
+
+# BOREAN TUNDRA
+# ------------------------------------------------------------
+# 289: Amber Ledge, Borean Tundra
+# Destinations: 245 (Valiance Keep, Borean Tundra), 246 (Fizzcrank Airstrip, Borean Tundra), 257 (Warsong Hold, Borean Tundra), 258 (Taunka'le Village, Borean Tundra), 259 (Bor'gorok Outpost, Borean Tundra)
+FlightPathDiscovery.Northrend.Routes.289 = "245,246,257,258,259"
+
+# 296: Unu'pe, Borean Tundra
+# Destinations: 245 (Valiance Keep, Borean Tundra), 246 (Fizzcrank Airstrip, Borean Tundra), 247 (Stars' Rest, Dragonblight), 257 (Warsong Hold, Borean Tundra), 258 (Taunka'le Village, Borean Tundra), 294 (Moa'ki, Dragonblight)
+FlightPathDiscovery.Northrend.Routes.296 = "245,246,247,257,258,294"
+
+# DRAGONBLIGHT
+# ------------------------------------------------------------
+# 252: Wyrmrest Temple, Dragonblight
+# Destinations: 244 (Wintergarde Keep, Dragonblight), 247 (Stars' Rest, Dragonblight), 251 (Fordragon Hold, Dragonblight), 254 (Venomspite, Dragonblight), 256 (Agmar's Hammer, Dragonblight), 260 (Kor'koron Vanguard, Dragonblight), 294 (Moa'ki, Dragonblight), 305 (Ebon Watch, Zul'Drak), 310 (Dalaran)
+FlightPathDiscovery.Northrend.Routes.252 = "244,247,251,254,256,260,294,305,310"
+
+# 294: Moa'ki, Dragonblight
+# Destinations: 244 (Wintergarde Keep, Dragonblight), 247 (Stars' Rest, Dragonblight), 252 (Wyrmrest Temple, Dragonblight), 254 (Venomspite, Dragonblight), 256 (Agmar's Hammer, Dragonblight), 295 (Kamagua, Howling Fjord), 296 (Unu'pe, Borean Tundra), 310 (Dalaran)
+FlightPathDiscovery.Northrend.Routes.294 = "244,247,252,254,256,295,296,310"
+
+# ZUL'DRAK
+# ------------------------------------------------------------
+# 304: The Argent Stand, Zul'Drak
+# Destinations: 249 (Camp Oneqwah, Grizzly Hills), 255 (Westfall Brigade, Grizzly Hills), 305 (Ebon Watch, Zul'Drak), 306 (Light's Breach, Zul'Drak), 307 (Zim'Torga, Zul'Drak)
+FlightPathDiscovery.Northrend.Routes.304 = "249,255,305,306,307"
+
+# 305: Ebon Watch, Zul'Drak
+# Destinations: 244 (Wintergarde Keep, Dragonblight), 251 (Fordragon Hold, Dragonblight), 252 (Wyrmrest Temple, Dragonblight), 254 (Venomspite, Dragonblight), 260 (Kor'koron Vanguard, Dragonblight), 304 (The Argent Stand, Zul'Drak), 306 (Light's Breach, Zul'Drak), 310 (Dalaran), 320 (K3, The Storm Peaks), 336 (Windrunner's Overlook, Crystalsong Forest), 337 (Sunreaver's Command, Crystalsong Forest)
+FlightPathDiscovery.Northrend.Routes.305 = "244,251,252,254,260,304,306,310,320,336,337"
+
+# 306: Light's Breach, Zul'Drak
+# Destinations: 244 (Wintergarde Keep, Dragonblight), 249 (Camp Oneqwah, Grizzly Hills), 250 (Conquest Hold, Grizzly Hills), 253 (Amberpine Lodge, Grizzly Hills), 254 (Venomspite, Dragonblight), 304 (The Argent Stand, Zul'Drak), 305 (Ebon Watch, Zul'Drak)
+FlightPathDiscovery.Northrend.Routes.306 = "244,249,250,253,254,304,305"
+
+# 307: Zim'Torga, Zul'Drak
+# Destinations: 249 (Camp Oneqwah, Grizzly Hills), 255 (Westfall Brigade, Grizzly Hills), 304 (The Argent Stand, Zul'Drak), 324 (Camp Tunka'lo, The Storm Peaks), 326 (Ulduar, The Storm Peaks), 331 (Gundrak, Zul'Drak)
+FlightPathDiscovery.Northrend.Routes.307 = "249,255,304,324,326,331"
+
+# 331: Gundrak, Zul'Drak
+# Destinations: 307 (Zim'Torga, Zul'Drak)
+FlightPathDiscovery.Northrend.Routes.331 = "307"
+
+# SHOLAZAR BASIN
+# ------------------------------------------------------------
+# 308: River's Heart, Sholazar Basin
+# Destinations: 246 (Fizzcrank Airstrip, Borean Tundra), 259 (Bor'gorok Outpost, Borean Tundra), 309 (Nesingwary Base Camp, Sholazar Basin), 310 (Dalaran)
+FlightPathDiscovery.Northrend.Routes.308 = "246,259,309,310"
+
+# 309: Nesingwary Base Camp, Sholazar Basin
+# Destinations: 246 (Fizzcrank Airstrip, Borean Tundra), 259 (Bor'gorok Outpost, Borean Tundra), 308 (River's Heart, Sholazar Basin)
+FlightPathDiscovery.Northrend.Routes.309 = "246,259,308"
+
+# THE STORM PEAKS
+# ------------------------------------------------------------
+# 320: K3, The Storm Peaks
+# Destinations: 305 (Ebon Watch, Zul'Drak), 310 (Dalaran), 321 (Frosthold, The Storm Peaks), 323 (Grom'arsh Crash-Site, The Storm Peaks), 324 (Camp Tunka'lo, The Storm Peaks), 336 (Windrunner's Overlook, Crystalsong Forest), 337 (Sunreaver's Command, Crystalsong Forest)
+FlightPathDiscovery.Northrend.Routes.320 = "305,310,321,323,324,336,337"
+
+# 326: Ulduar, The Storm Peaks
+# Destinations: 307 (Zim'Torga, Zul'Drak), 321 (Frosthold, The Storm Peaks), 323 (Grom'arsh Crash-Site, The Storm Peaks), 324 (Camp Tunka'lo, The Storm Peaks), 327 (Bouldercrag's Refuge, The Storm Peaks)
+FlightPathDiscovery.Northrend.Routes.326 = "307,321,323,324,327"
+
+# 327: Bouldercrag's Refuge, The Storm Peaks
+# Destinations: 321 (Frosthold, The Storm Peaks), 323 (Grom'arsh Crash-Site, The Storm Peaks), 326 (Ulduar, The Storm Peaks), 340 (Argent Tournament Grounds, Icecrown)
+FlightPathDiscovery.Northrend.Routes.327 = "321,323,326,340"
+
+# ICECROWN
+# ------------------------------------------------------------
+# 334: The Argent Vanguard, Icecrown
+# Destinations: 310 (Dalaran), 321 (Frosthold, The Storm Peaks), 323 (Grom'arsh Crash-Site, The Storm Peaks)
+FlightPathDiscovery.Northrend.Routes.334 = "310,321,323"
+
+# 340: Argent Tournament Grounds, Icecrown
+# Destinations: 310 (Dalaran), 327 (Bouldercrag's Refuge, The Storm Peaks)
+FlightPathDiscovery.Northrend.Routes.340 = "310,327"
+
+# ============================================================
+# NORTHREND DISCOVERY PRICES
+# 50000 copper = 5 gold per destination
+# ============================================================
+
+# 183: Valgarde Port, Howling Fjord
+FlightPathDiscovery.Northrend.Price.183 = 50000
+# 184: Fort Wildervar, Howling Fjord
+FlightPathDiscovery.Northrend.Price.184 = 50000
+# 185: Westguard Keep, Howling Fjord
+FlightPathDiscovery.Northrend.Price.185 = 50000
+# 190: New Agamand, Howling Fjord
+FlightPathDiscovery.Northrend.Price.190 = 50000
+# 191: Vengeance Landing, Howling Fjord
+FlightPathDiscovery.Northrend.Price.191 = 50000
+# 192: Camp Winterhoof, Howling Fjord
+FlightPathDiscovery.Northrend.Price.192 = 50000
+# 244: Wintergarde Keep, Dragonblight
+FlightPathDiscovery.Northrend.Price.244 = 50000
+# 245: Valiance Keep, Borean Tundra
+FlightPathDiscovery.Northrend.Price.245 = 50000
+# 246: Fizzcrank Airstrip, Borean Tundra
+FlightPathDiscovery.Northrend.Price.246 = 50000
+# 247: Stars' Rest, Dragonblight
+FlightPathDiscovery.Northrend.Price.247 = 50000
+# 248: Apothecary Camp, Howling Fjord
+FlightPathDiscovery.Northrend.Price.248 = 50000
+# 249: Camp Oneqwah, Grizzly Hills
+FlightPathDiscovery.Northrend.Price.249 = 50000
+# 250: Conquest Hold, Grizzly Hills
+FlightPathDiscovery.Northrend.Price.250 = 50000
+# 251: Fordragon Hold, Dragonblight
+FlightPathDiscovery.Northrend.Price.251 = 50000
+# 252: Wyrmrest Temple, Dragonblight
+FlightPathDiscovery.Northrend.Price.252 = 50000
+# 253: Amberpine Lodge, Grizzly Hills
+FlightPathDiscovery.Northrend.Price.253 = 50000
+# 254: Venomspite, Dragonblight
+FlightPathDiscovery.Northrend.Price.254 = 50000
+# 255: Westfall Brigade, Grizzly Hills
+FlightPathDiscovery.Northrend.Price.255 = 50000
+# 256: Agmar's Hammer, Dragonblight
+FlightPathDiscovery.Northrend.Price.256 = 50000
+# 257: Warsong Hold, Borean Tundra
+FlightPathDiscovery.Northrend.Price.257 = 50000
+# 258: Taunka'le Village, Borean Tundra
+FlightPathDiscovery.Northrend.Price.258 = 50000
+# 259: Bor'gorok Outpost, Borean Tundra
+FlightPathDiscovery.Northrend.Price.259 = 50000
+# 260: Kor'koron Vanguard, Dragonblight
+FlightPathDiscovery.Northrend.Price.260 = 50000
+# 289: Amber Ledge, Borean Tundra
+FlightPathDiscovery.Northrend.Price.289 = 50000
+# 294: Moa'ki, Dragonblight
+FlightPathDiscovery.Northrend.Price.294 = 50000
+# 295: Kamagua, Howling Fjord
+FlightPathDiscovery.Northrend.Price.295 = 50000
+# 296: Unu'pe, Borean Tundra
+FlightPathDiscovery.Northrend.Price.296 = 50000
+# 304: The Argent Stand, Zul'Drak
+FlightPathDiscovery.Northrend.Price.304 = 50000
+# 305: Ebon Watch, Zul'Drak
+FlightPathDiscovery.Northrend.Price.305 = 50000
+# 306: Light's Breach, Zul'Drak
+FlightPathDiscovery.Northrend.Price.306 = 50000
+# 307: Zim'Torga, Zul'Drak
+FlightPathDiscovery.Northrend.Price.307 = 50000
+# 308: River's Heart, Sholazar Basin
+FlightPathDiscovery.Northrend.Price.308 = 50000
+# 309: Nesingwary Base Camp, Sholazar Basin
+FlightPathDiscovery.Northrend.Price.309 = 50000
+# 310: Dalaran
+FlightPathDiscovery.Northrend.Price.310 = 50000
+# 320: K3, The Storm Peaks
+FlightPathDiscovery.Northrend.Price.320 = 50000
+# 321: Frosthold, The Storm Peaks
+FlightPathDiscovery.Northrend.Price.321 = 50000
+# 323: Grom'arsh Crash-Site, The Storm Peaks
+FlightPathDiscovery.Northrend.Price.323 = 50000
+# 324: Camp Tunka'lo, The Storm Peaks
+FlightPathDiscovery.Northrend.Price.324 = 50000
+# 326: Ulduar, The Storm Peaks
+FlightPathDiscovery.Northrend.Price.326 = 50000
+# 327: Bouldercrag's Refuge, The Storm Peaks
+FlightPathDiscovery.Northrend.Price.327 = 50000
+# 331: Gundrak, Zul'Drak
+FlightPathDiscovery.Northrend.Price.331 = 50000
+# 334: The Argent Vanguard, Icecrown
+FlightPathDiscovery.Northrend.Price.334 = 50000
+# 336: Windrunner's Overlook, Crystalsong Forest
+FlightPathDiscovery.Northrend.Price.336 = 50000
+# 337: Sunreaver's Command, Crystalsong Forest
+FlightPathDiscovery.Northrend.Price.337 = 50000
+# 340: Argent Tournament Grounds, Icecrown
+FlightPathDiscovery.Northrend.Price.340 = 50000
