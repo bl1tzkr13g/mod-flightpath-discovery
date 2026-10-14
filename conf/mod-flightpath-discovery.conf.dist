@@ -135,9 +135,13 @@ FlightPathDiscovery.Kalimdor.Routes.65 = "26,49,52,166"
 # Destinations: 48 (Bloodvenom Post - Horde), 53 (Everlook - Horde)
 FlightPathDiscovery.Kalimdor.Routes.69 = "48,53"
 
-# 72: Cenarion Hold - Alliance
-# Destinations: 79 (Marshal’s Refuge - Neutral (verify))
+# 72: Cenarion Hold - Horde
+# Destinations: 79 (Marshal's Refuge - Neutral)
 FlightPathDiscovery.Kalimdor.Routes.72 = "79"
+
+# 73: Cenarion Hold - Alliance
+# Custom route: 79 (Marshal's Refuge - Neutral)
+FlightPathDiscovery.Kalimdor.Routes.73 = "79"
 
 # 77: Camp Taurajo - Horde
 # Destinations: 22 (Thunder Bluff - Horde), 25 (The Crossroads - Horde), 30 (Freewind Post - Horde)
@@ -145,7 +149,7 @@ FlightPathDiscovery.Kalimdor.Routes.77 = "22,25,30"
 
 # 79: Marshal’s Refuge - Neutral (verify)
 # Destinations: 39 (Gadgetzan - Alliance), 40 (Gadgetzan - Horde), 72 (Cenarion Hold - Alliance)
-FlightPathDiscovery.Kalimdor.Routes.79 = "39,40,72"
+FlightPathDiscovery.Kalimdor.Routes.79 = "39,40,72,73"
 
 # 80: Ratchet - Neutral (verify)
 # Destinations: 23 (Orgrimmar - Horde), 25 (The Crossroads - Horde), 55 (Brackenwall Village - Horde)
@@ -221,9 +225,9 @@ FlightPathDiscovery.Kalimdor.Price.64 = 30000
 FlightPathDiscovery.Kalimdor.Price.65 = 30000
 # 69: Moonglade - Horde
 FlightPathDiscovery.Kalimdor.Price.69 = 1000
-# 72: Cenarion Hold - Alliance
+# 72: Cenarion Hold - Horde
 FlightPathDiscovery.Kalimdor.Price.72 = 50000
-# 73: Cenarion Hold - Horde
+# 73: Cenarion Hold - Alliance
 FlightPathDiscovery.Kalimdor.Price.73 = 50000
 # 77: Camp Taurajo - Horde
 FlightPathDiscovery.Kalimdor.Price.77 = 1000
