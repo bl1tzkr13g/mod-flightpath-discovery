@@ -39,12 +39,21 @@ bool SupportedMap(uint32 map)
            (map == 571 && sConfigMgr->GetOption<bool>("FlightPathDiscovery.EnableNorthrend", false));
 }
 
+
 bool FactionNode(Player* player, uint32 node)
 {
-    if (!node || node > 256) return false; // 3.3.5a taxi mask is 8 x uint32
-    TaxiMask const& mask = player->GetTeamId() == TEAM_ALLIANCE ? sAllianceTaxiNodesMask : sHordeTaxiNodesMask;
-    return (mask[(node - 1) / 32] & (uint32(1) << ((node - 1) % 32))) != 0;
+    if (!player || !node || node > TaxiMaskSize * 32)
+        return false;
+
+    TaxiMask const& mask =
+        player->GetTeamId() == TEAM_ALLIANCE
+            ? sAllianceTaxiNodesMask
+            : sHordeTaxiNodesMask;
+
+    return (mask[(node - 1) / 32] &
+            (uint32(1) << ((node - 1) % 32))) != 0;
 }
+
 
 uint32 NodeFor(Creature* npc, Player* player)
 {
@@ -97,7 +106,7 @@ bool ParseNode(std::string const& input, uint32& node)
     try
     {
         unsigned long long parsed = std::stoull(value);
-        if (!parsed || parsed > 256 || !sTaxiNodesStore.LookupEntry(uint32(parsed))) return false;
+        if (!parsed || parsed > TaxiMaskSize * 32 ||     !sTaxiNodesStore.LookupEntry(uint32(parsed)))     return false;
         node = uint32(parsed);
         return true;
     }
@@ -114,11 +123,12 @@ for (auto const& continent : {
     std::pair<char const*, uint32>{"Kalimdor", 1},
     {"EasternKingdoms", 0},
     {"Outland", 530}
+    {"Northrend", 571}
 })
     {
         std::string prefix = std::string("FlightPathDiscovery.") + continent.first + ".";
 
-        for (uint32 source = 1; source <= 256; ++source)
+        for (uint32 source = 1; source <= TaxiMaskSize * 32; ++source)
         {
             std::string key = prefix + "Routes." + std::to_string(source);
 
@@ -152,7 +162,7 @@ for (auto const& continent : {
             }
         }
 
-        for (uint32 node = 1; node <= 256; ++node)
+        for (uint32 node = 1; node <= TaxiMaskSize * 32; ++node)
         {
             auto const* info = sTaxiNodesStore.LookupEntry(node);
 
