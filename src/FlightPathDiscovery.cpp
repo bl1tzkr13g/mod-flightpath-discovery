@@ -33,7 +33,10 @@ bool Enabled() { return sConfigMgr->GetOption<bool>("FlightPathDiscovery.Enable"
 uint32 BoardEntry() { return sConfigMgr->GetOption<uint32>("FlightPathDiscovery.BoardEntry", 900100); }
 bool SupportedMap(uint32 map)
 {
-    return map == 0 || map == 1 || (map == 571 && sConfigMgr->GetOption<bool>("FlightPathDiscovery.EnableNorthrend", false));
+    return map == 0 ||
+           map == 1 ||
+           (map == 530 && sConfigMgr->GetOption<bool>("FlightPathDiscovery.EnableOutland", true)) ||
+           (map == 571 && sConfigMgr->GetOption<bool>("FlightPathDiscovery.EnableNorthrend", false));
 }
 
 bool FactionNode(Player* player, uint32 node)
@@ -107,10 +110,11 @@ void LoadNetwork()
     routes.clear();
     prices.clear();
 
-    for (auto const& continent : {
-        std::pair<char const*, uint32>{"Kalimdor", 1},
-        {"EasternKingdoms", 0}
-    })
+for (auto const& continent : {
+    std::pair<char const*, uint32>{"Kalimdor", 1},
+    {"EasternKingdoms", 0},
+    {"Outland", 530}
+})
     {
         std::string prefix = std::string("FlightPathDiscovery.") + continent.first + ".";
 
