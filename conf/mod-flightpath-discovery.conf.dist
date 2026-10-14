@@ -435,6 +435,7 @@ FlightPathDiscovery.EasternKingdoms.Price.195 = 7500
 # NOTE: Requires C++ support for Map 530 before activation.
 # ============================================================
 
+# HORDE OUTLAND FLIGHT PATHS
 # ------------------------------------------------------------
 # HELLFIRE PENINSULA
 # ------------------------------------------------------------
@@ -486,10 +487,6 @@ FlightPathDiscovery.Outland.Routes.120 = "118,128"
 # Shattrath, Shadowmoon Village
 FlightPathDiscovery.Outland.Routes.127 = "123,128"
 
-# 128: Shattrath
-# Falcon Watch, Garadar, Stonebreaker Hold
-FlightPathDiscovery.Outland.Routes.128 = "102,120,127"
-
 
 # ------------------------------------------------------------
 # BLADE'S EDGE MOUNTAINS
@@ -499,30 +496,10 @@ FlightPathDiscovery.Outland.Routes.128 = "102,120,127"
 # Zabra'jin, Evergrove, Mok'Nathal Village
 FlightPathDiscovery.Outland.Routes.126 = "118,160,163"
 
-# 160: Evergrove
-# Thunderlord Stronghold, Area 52
-FlightPathDiscovery.Outland.Routes.160 = "122,126"
 
 # 163: Mok'Nathal Village
 # Thunderlord Stronghold, Swamprat Post, Area 52
 FlightPathDiscovery.Outland.Routes.163 = "122,126,151"
-
-
-# ------------------------------------------------------------
-# NETHERSTORM
-# ------------------------------------------------------------
-
-# 122: Area 52
-# Evergrove, Mok'Nathal Village, Stormspire, Cosmowrench
-FlightPathDiscovery.Outland.Routes.122 = "139,150,160,163"
-
-# 139: The Stormspire
-# Area 52, Cosmowrench
-FlightPathDiscovery.Outland.Routes.139 = "122,150"
-
-# 150: Cosmowrench
-# Area 52, Stormspire
-FlightPathDiscovery.Outland.Routes.150 = "122,139"
 
 
 # ------------------------------------------------------------
@@ -533,14 +510,154 @@ FlightPathDiscovery.Outland.Routes.150 = "122,139"
 # Stonebreaker Hold, Altar of Sha'tar, Sanctum of the Stars
 FlightPathDiscovery.Outland.Routes.123 = "127,140,159"
 
+
+# ============================================================
+# ALLIANCE OUTLAND FLIGHT PATHS
+# Based on annotated Alliance flight map and TaxiPath.dbc
+# ============================================================
+
+# ------------------------------------------------------------
+# HELLFIRE PENINSULA
+# ------------------------------------------------------------
+
+# 100: Honor Hold
+# Temple of Telhamat, Allerian Stronghold,
+# Shattrath, Dark Portal (Alliance), Shatter Point
+FlightPathDiscovery.Outland.Routes.100 = "101,121,128,129,149"
+
+# 101: Temple of Telhamat
+# Honor Hold, Telredor
+FlightPathDiscovery.Outland.Routes.101 = "100,117"
+
+# 129: Dark Portal (Alliance)
+# Honor Hold only
+FlightPathDiscovery.Outland.Routes.129 = "100"
+
+# 149: Shatter Point
+# Honor Hold, Dark Portal (Alliance)
+FlightPathDiscovery.Outland.Routes.149 = "100,129"
+
+
+# ------------------------------------------------------------
+# ZANGARMARSH
+# ------------------------------------------------------------
+
+# 117: Telredor
+# Temple of Telhamat, Telaar, Sylvanaar,
+# Shattrath, Toshley's Station, Orebor Harborage
+FlightPathDiscovery.Outland.Routes.117 = "101,119,125,128,156,164"
+
+# 164: Orebor Harborage
+# Telredor, Sylvanaar
+FlightPathDiscovery.Outland.Routes.164 = "117,125"
+
+
+# ------------------------------------------------------------
+# NAGRAND
+# ------------------------------------------------------------
+
+# 119: Telaar
+# Telredor, Allerian Stronghold, Shattrath
+FlightPathDiscovery.Outland.Routes.119 = "117,121,128"
+
+
+# ------------------------------------------------------------
+# TEROKKAR FOREST
+# ------------------------------------------------------------
+
+# 121: Allerian Stronghold
+# Honor Hold, Telaar, Wildhammer Stronghold, Shattrath
+FlightPathDiscovery.Outland.Routes.121 = "100,119,124,128"
+
+
+# ------------------------------------------------------------
+# BLADE'S EDGE MOUNTAINS
+# ------------------------------------------------------------
+
+# 125: Sylvanaar
+# Telredor, Area 52, Stormspire,
+# Toshley's Station, Evergrove, Orebor Harborage
+FlightPathDiscovery.Outland.Routes.125 = "117,122,139,156,160,164"
+
+# 156: Toshley's Station
+# Telredor, Area 52, Sylvanaar, Evergrove
+FlightPathDiscovery.Outland.Routes.156 = "117,122,125,160"
+
+
+# ------------------------------------------------------------
+# SHADOWMOON VALLEY
+# ------------------------------------------------------------
+
+# 124: Wildhammer Stronghold
+# Allerian Stronghold, Altar of Sha'tar,
+# Sanctum of the Stars
+FlightPathDiscovery.Outland.Routes.124 = "121,140,159"
+
+
+# ============================================================
+# NEUTRAL OUTLAND FLIGHT PATHS
+# Shared by Horde and Alliance
+# Map ID: 530
+#
+# Routes are directional.
+# Faction restrictions are enforced by the module.
+# ============================================================
+
+# ------------------------------------------------------------
+# TEROKKAR FOREST
+# ------------------------------------------------------------
+
+# 128: Shattrath City
+# Horde: Falcon Watch, Garadar, Stonebreaker Hold
+# Alliance: Honor Hold, Telredor, Telaar, Allerian Stronghold
+FlightPathDiscovery.Outland.Routes.128 = "100,102,117,119,120,121,127"
+
+
+# ------------------------------------------------------------
+# BLADE'S EDGE MOUNTAINS
+# ------------------------------------------------------------
+
+# 160: Evergrove
+# Horde: Area 52, Thunderlord Stronghold
+# Alliance: Area 52, Sylvanaar, Toshley's Station
+FlightPathDiscovery.Outland.Routes.160 = "122,125,126,156"
+
+
+# ------------------------------------------------------------
+# NETHERSTORM
+# ------------------------------------------------------------
+
+# 122: Area 52
+# Horde: Stormspire, Cosmowrench, Evergrove, Mok'Nathal Village
+# Alliance: Sylvanaar, Stormspire, Cosmowrench,
+#           Toshley's Station, Evergrove
+FlightPathDiscovery.Outland.Routes.122 = "125,139,150,156,160,163"
+
+# 139: The Stormspire
+# Horde: Area 52, Cosmowrench
+# Alliance: Area 52, Sylvanaar, Cosmowrench
+FlightPathDiscovery.Outland.Routes.139 = "122,125,150"
+
+# 150: Cosmowrench
+# Both factions: Area 52, Stormspire
+FlightPathDiscovery.Outland.Routes.150 = "122,139"
+
+
+# ------------------------------------------------------------
+# SHADOWMOON VALLEY
+# ------------------------------------------------------------
+
 # 140: Altar of Sha'tar
-# Shadowmoon Village
-FlightPathDiscovery.Outland.Routes.140 = "123"
+# Aldor flight point
+# Horde: Shadowmoon Village
+# Alliance: Wildhammer Stronghold
+FlightPathDiscovery.Outland.Routes.140 = "123,124"
 
 # 159: Sanctum of the Stars
-# Shadowmoon Village
-FlightPathDiscovery.Outland.Routes.159 = "123"
-
+# Scryers flight point
+# Horde: Shadowmoon Village
+# Alliance: Wildhammer Stronghold
+FlightPathDiscovery.Outland.Routes.159 = "123,124"
 
 # ============================================================
 # OUTLAND DISCOVERY PRICES
@@ -578,5 +695,3 @@ FlightPathDiscovery.Outland.Price.159 = 50000
 FlightPathDiscovery.Outland.Price.160 = 50000
 FlightPathDiscovery.Outland.Price.163 = 50000
 FlightPathDiscovery.Outland.Price.164 = 50000
-
-
