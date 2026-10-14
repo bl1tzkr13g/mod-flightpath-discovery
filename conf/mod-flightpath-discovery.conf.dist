@@ -11,8 +11,12 @@
 [worldserver]
 FlightPathDiscovery.Enable = 1
 FlightPathDiscovery.TestCreatureEntry = 0
+# Flight Path Discovery Board GameObject Entry, Default: 900100 (custom GameObject entry)
+# Changing this value requires a valid GameObject template with the new entry ID.
 FlightPathDiscovery.BoardEntry = 900100
 FlightPathDiscovery.BoardDistance = 2.5
+# Enable flight path discovery boards in Outland
+FlightPathDiscovery.EnableOutland = 1
 FlightPathDiscovery.EnableNorthrend = 0
 FlightPathDiscovery.UnknownZoneLevel = 1
 # Interval in seconds between nearby discovery-board recovery checks.
