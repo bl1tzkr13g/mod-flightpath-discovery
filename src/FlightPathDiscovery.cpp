@@ -191,9 +191,35 @@ std::string Money(uint32 copper)
     return out.str();
 }
 
+
+bool ReputationAllowsDestination(Player* player, uint32 destination)
+{
+    if (!player)
+        return false;
+
+    uint32 reputationFaction = 0;
+
+    switch (destination)
+    {
+        case 140: // Altar of Sha'tar - Aldor
+            reputationFaction = 932;
+            break;
+
+        case 159: // Sanctum of the Stars - Scryers
+            reputationFaction = 934;
+            break;
+
+        default:
+            return true;
+    }
+
+    return player->GetReputationRank(reputationFaction) >= REP_NEUTRAL;
+}
+
+
 bool Eligible(Player* player, uint32 source, uint32 destination)
 {
-    if (!player || !source || !destination || !FactionNode(player, destination) || player->m_taxi.IsTaximaskNodeKnown(destination)) return false;
+     if (!player || !source || !destination ||     !FactionNode(player, destination) ||     !ReputationAllowsDestination(player, destination) ||     player->m_taxi.IsTaximaskNodeKnown(destination))     return false;
     auto const* dst = sTaxiNodesStore.LookupEntry(destination);
     if (!dst || !SupportedMap(dst->map_id) || !Price(destination)) return false;
     auto const* src = sTaxiNodesStore.LookupEntry(source);
