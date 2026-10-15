@@ -122,7 +122,7 @@ void LoadNetwork()
 for (auto const& continent : {
     std::pair<char const*, uint32>{"Kalimdor", 1},
     {"EasternKingdoms", 0},
-    {"Outland", 530}
+    {"Outland", 530},
     {"Northrend", 571}
 })
     {
